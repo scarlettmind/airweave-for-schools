@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>airweave for Schools</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1c1c1c; --ink-2:rgba(28,28,28,.72); --muted:rgba(28,28,28,.55);
+  --line:#cfcfcf; --grey:#efefef; --white:#ffffff; --dark:#1c1c1c;
+  --navy:#2a457c; --navy-2:#34558f; --blue-lt:#8fb0ff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--grey);color:var(--ink);font-family:"Instrument Sans",system-ui,sans-serif;font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+.wrap{max-width:1240px;margin:0 auto;padding:0 32px}
+@media(max-width:700px){.wrap{padding:0 16px}}
+
+/* type — airweave.com: uppercase, wide tracking, regular weight */
+.t-eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.t-h1{font-size:clamp(26px,3.6vw,44px);line-height:1.25;letter-spacing:.14em;text-transform:uppercase;font-weight:400}
+.t-h2{font-size:clamp(22px,2.3vw,28px);line-height:1.4;letter-spacing:.18em;text-transform:uppercase;font-weight:400}
+.t-h3{font-size:18px;letter-spacing:.14em;text-transform:uppercase;font-weight:400}
+.t-body{font-size:15px;color:var(--ink-2);max-width:520px}
+.center{text-align:center}.center .t-body{margin-left:auto;margin-right:auto}
+.jp{font-family:"Noto Sans JP",sans-serif;font-weight:300;letter-spacing:.12em}
+
+/* pill buttons */
+.pill{display:inline-block;border:1px solid var(--line);border-radius:30px;padding:8px 28px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;color:var(--ink);transition:background .2s,color .2s,border-color .2s}
+.pill:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.pill.light{color:#fff;border-color:rgba(255,255,255,.6)}
+.pill.light:hover{background:#fff;color:var(--ink)}
+.pill.solid{background:var(--navy);border-color:var(--navy);color:#fff}
+.pill.solid:hover{background:#fff;color:var(--navy)}
+.pills{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:28px}
+
+/* nav */
+.top{background:var(--dark);color:#fff;font-size:11px;letter-spacing:.18em;text-transform:uppercase;text-align:center;padding:9px 16px}
+nav{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid #e4e4e4}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;height:64px}
+.brand{display:flex;align-items:center;gap:14px;text-decoration:none}
+.aw-logo{height:19px;width:auto;color:var(--ink)}
+.brand small{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);padding-left:14px;border-left:1px solid #d9d9d9}
+nav ul{display:flex;gap:30px;list-style:none;font-size:13px}
+nav a{text-decoration:none}
+nav a:hover{color:var(--navy)}
+@media(max-width:820px){nav ul{display:none}}
+
+/* hero */
+.hero{position:relative;min-height:86vh;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center;
+  background:linear-gradient(rgba(20,20,20,.45),rgba(20,20,20,.55)),url("https://res.cloudinary.com/opera-national-de-paris/image/upload/w_2400,c_limit,q_auto,f_jpg/v1/recette/jjv6pgjppjeaot7dttpd") center/cover no-repeat,#2b2b2b}
+.hero .t-eyebrow{color:rgba(255,255,255,.85);margin-bottom:22px}
+.hero p.sub{max-width:620px;margin:22px auto 0;font-size:16px;color:rgba(255,255,255,.9)}
+.hero .jp{display:block;margin-top:10px;font-size:13px;color:rgba(255,255,255,.75)}
+.credit{position:absolute;right:16px;bottom:10px;font-size:10px;color:rgba(255,255,255,.6);letter-spacing:.04em}
+
+/* dark statement band */
+.band-dark{background:var(--dark);color:#fff;padding:34px 0}
+.band-dark .t-eyebrow{color:rgba(255,255,255,.6);text-align:center;margin-bottom:22px}
+.logo-row{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:26px 64px}
+.logo-row img,.logo-row svg{height:36px;width:auto;filter:brightness(0) invert(1);opacity:.92}
+.logo-row .w{height:20px}
+
+/* navy stats */
+.band-navy{background:var(--navy);color:#fff;padding:56px 0}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
+.stat .n{font-size:46px;line-height:1;letter-spacing:.04em}
+.stat .t{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.78);margin-top:14px;line-height:1.6}
+@media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr);row-gap:36px}.stat .n{font-size:36px}}
+
+/* section heading block */
+.head{padding:72px 0 44px}
+.head .t-body{margin-top:16px}
+
+/* 50/50 split image-with-text (airweave.com) */
+.split{display:grid;grid-template-columns:1fr 1fr;min-height:560px}
+.split .media{background:#ddd center/cover no-repeat;position:relative;min-height:340px}
+.split .text{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:64px 9%}
+.split.rev .media{order:2}
+.split .text.white{background:#fff}.split .text.grey{background:var(--grey)}
+.split .text.navy{background:var(--navy);color:#fff}
+.split .text.navy .t-eyebrow,.split .text.navy .t-body{color:rgba(255,255,255,.8)}
+.split .lg{height:34px;width:auto;margin-bottom:22px;filter:brightness(0);opacity:.85}
+.split .lg.w{height:20px}
+.split .t-eyebrow{margin-bottom:12px}
+.split .t-h2{margin-bottom:16px}
+.facts{list-style:none;margin:10px auto 0;max-width:430px;font-size:14px;color:var(--ink-2)}
+.facts li{padding:9px 0;border-top:1px solid #dedede}
+.facts li:first-child{border-top:none}
+@media(max-width:860px){.split{grid-template-columns:1fr;min-height:0}.split.rev .media{order:0}.split .media{min-height:300px}.split .text{padding:48px 22px}}
+
+/* olympic band */
+.games{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;gap:28px;align-items:start;padding:58px 0}
+.games .lead{font-size:20px;letter-spacing:.06em;line-height:1.5}
+.game .y{font-size:22px;letter-spacing:.12em;text-transform:uppercase}
+.game .d{font-size:13px;color:rgba(255,255,255,.7);margin-top:6px}
+@media(max-width:860px){.games{grid-template-columns:1fr}}
+
+/* science: profile + pairs */
+.sci{background:#fff;padding-bottom:64px}
+.sci-grid{display:grid;grid-template-columns:300px 1fr;gap:20px;align-items:stretch}
+.prof{background:var(--grey);display:flex;flex-direction:column}
+.prof img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center 25%}
+.prof-body{padding:24px 26px 28px}
+.prof .tag{pointer-events:none;font-size:11px;padding:5px 16px}
+.prof-name{font-size:17px;letter-spacing:.14em;text-transform:uppercase;margin-top:16px}
+.prof-jp{font-size:13px;color:var(--muted);margin-top:4px}
+.prof p{font-size:14px;color:var(--ink-2);margin-top:12px}
+.pairs{display:flex;flex-direction:column;gap:14px}
+.pair-h{display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.pair-h span:last-child{color:var(--navy)}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:14px;flex:1}
+.pair .adv{background:var(--grey);padding:28px;font-size:18px;line-height:1.5;display:flex;align-items:center;position:relative}
+.pair .adv::after{content:"→";position:absolute;right:-12px;top:50%;transform:translateY(-50%);width:24px;height:24px;line-height:22px;text-align:center;background:#fff;border:1px solid var(--line);border-radius:50%;font-size:12px;z-index:1}
+.pair .feat{background:var(--navy);color:#fff;padding:28px;display:flex;flex-direction:column;justify-content:center}
+.pair .feat b{font-weight:400;font-size:16px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px}
+.pair .feat span{font-size:14px;color:rgba(255,255,255,.85)}
+.small-note{font-size:11px;color:var(--muted);margin-top:16px}
+@media(max-width:900px){.sci-grid{grid-template-columns:1fr}.prof{flex-direction:row}.prof img{width:120px;aspect-ratio:1/1;flex:none}.prof-body{padding:16px 18px}.pair,.pair-h{grid-template-columns:1fr}.pair-h span:last-child{display:none}.pair .adv::after{right:auto;left:50%;top:auto;bottom:-19px;transform:translateX(-50%) rotate(90deg)}}
+
+/* evidence: 3 animated cards */
+.evidence{background:var(--dark);color:#fff;padding-bottom:72px}
+.evidence .t-eyebrow{color:rgba(255,255,255,.6)}
+.ev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.ev{background:#262626;padding:34px 30px 28px;display:flex;flex-direction:column}
+.ico{width:36px;height:36px;color:var(--blue-lt)}
+.ev-k{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-top:18px}
+.ev-big{font-size:clamp(48px,5vw,64px);line-height:1.05;letter-spacing:.01em;margin-top:8px}
+.ev-sub{font-size:14px;color:rgba(255,255,255,.8);margin-top:6px;min-height:44px}
+.bars{margin-top:24px;display:flex;flex-direction:column;gap:10px}
+.bar{display:flex;align-items:center;gap:10px}
+.bar i{display:block;height:14px;width:0;border-radius:2px;transition:width 1.2s cubic-bezier(.2,.7,.2,1)}
+.ev.in .bar i{width:calc(var(--w) * .78)}
+.bar em{font-style:normal;font-size:13px;color:rgba(255,255,255,.85);white-space:nowrap}
+i.aw{background:var(--blue-lt)} i.cmp{background:#5e5e5e}
+.scale{position:relative;height:56px;margin-top:24px}
+.scale .track{position:absolute;left:0;right:0;top:34px;height:2px;background:linear-gradient(90deg,var(--blue-lt),#5e5e5e)}
+.scale .dot{position:absolute;top:28px;left:50%;width:14px;height:14px;border-radius:50%;transform:translateX(-50%);transition:left 1.2s cubic-bezier(.2,.7,.2,1)}
+.ev.in .scale .dot{left:var(--x)}
+.scale .dot.aw{background:var(--blue-lt)} .scale .dot.cmp{background:#8a8a8a}
+.scale .dot b{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);font-weight:400;font-size:12px;white-space:nowrap;color:rgba(255,255,255,.85)}
+.ev-src{margin-top:auto;padding-top:22px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45)}
+.ev-legend{display:flex;justify-content:center;gap:24px;margin-top:26px;font-size:12px;color:rgba(255,255,255,.7)}
+.ev-legend i{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:7px;vertical-align:-1px}
+.transp{font-size:11px;color:#9b9b9b;margin-top:18px}
+@media(max-width:900px){.ev-grid{grid-template-columns:1fr}.ev-sub{min-height:0}}
+@media(prefers-reduced-motion:reduce){.bar i,.scale .dot{transition:none}}
+
+/* why — 3 cards on grey */
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding-bottom:80px}
+.why .card{background:#fff;padding:36px 32px;border-top:3px solid var(--navy)}
+.why .num{font-size:12px;letter-spacing:.18em;color:var(--navy)}
+.why h4{font-weight:400;font-size:16px;letter-spacing:.14em;text-transform:uppercase;margin:12px 0 10px;line-height:1.45}
+.why p{font-size:14px;color:var(--ink-2)}
+@media(max-width:860px){.why{grid-template-columns:1fr}}
+
+/* contact — dark icon band */
+.contact{background:var(--dark);color:#fff;padding:72px 0;text-align:center}
+.contact .t-eyebrow{color:rgba(255,255,255,.6);margin-bottom:16px}
+.contact .name{font-size:26px;letter-spacing:.16em;text-transform:uppercase}
+.contact .role{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.75);margin-top:8px}
+.contact .addr{font-size:13px;color:rgba(255,255,255,.6);margin-top:14px}
+.contact .mail{display:inline-block;margin-top:6px;color:var(--blue-lt);text-decoration:none;font-size:15px}
+
+footer{background:#fff;color:var(--muted);font-size:12px;padding:44px 0;line-height:1.8}
+footer .aw-logo{height:16px;margin-bottom:16px}
+footer a{color:var(--ink-2)}
+</style>
+</head>
+<body>
+
+<div class="top">airweave for Schools · Boarding &amp; Residential Life</div>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top"><svg class="aw-logo" role="img" aria-label="airweave" viewBox="0 0 1000 174.58" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="m413.08,155.91c-1.24,1.12-2.34,2.11-3.44,3.09-5.02,4.5-10.44,8.43-16.58,11.32-5.47,2.57-11.16,4.18-17.3,4.17-3.95,0-7.76-.67-11.43-2.02-11.59-4.28-17.69-12.71-18.76-24.78-.46-5.2.01-10.37,1.32-15.44,3.59-13.93,7.19-27.84,10.76-41.76.7-2.73,1.38-5.47,1.81-8.25.93-6.04-1.84-9.03-8.01-8.74-1.63.08-3.23.55-4.85.85-1.32.25-2.64.65-3.97.74-2.95.2-5.25-1.91-5.26-4.81-.01-2.94.63-5.74,3.65-7.07,7.53-3.33,15.12-6.46,23.41-7.48,3.33-.41,6.61-.1,9.77.87,6.45,1.97,10.25,6.36,11.54,12.92.93,4.75.53,9.44-.62,14.1-3.24,13.09-6.51,26.18-9.75,39.27-.92,3.74-1.8,7.49-2.66,11.25-.87,3.79-1.03,7.63-.56,11.49.14,1.16.42,2.34.81,3.45,1.88,5.32,6.14,8.02,11.82,7.43,1.92-.2,3.84-.62,5.7-1.15,5.4-1.53,10.22-4.18,14.57-7.66,3.48-2.79,5.82-6.17,6.79-10.65,2.3-10.72,4.88-21.38,7.37-32.06,3.24-13.85,6.5-27.7,9.75-41.55.17-.72.3-1.45.52-2.16,1.04-3.45,2.06-4.27,5.78-4.34,4.64-.07,9.28-.03,13.93,0,1.35,0,2.69.07,3.84.96,1.88,1.45,2.38,3.35,1.9,5.55-.62,2.9-1.33,5.77-2.01,8.66-5,21.51-9.98,43.02-15.01,64.52-.79,3.38-1.03,6.7-.14,10.11,1.28,4.89,4.27,7.99,9.24,9.29,4.51,1.17,8.92.66,13.28-.59,6.04-1.73,11.26-4.96,15.54-9.42,12.71-13.25,19.82-28.76,18.89-47.38-.13-2.72-.73-5.32-2.1-7.65-1.58-2.68-3.37-5.24-5.11-7.84-1.08-1.6-2.33-3.09-3.32-4.75-3.59-6.06-2.89-13.57,1.65-18.64,5.35-5.99,13.4-6.47,18.91-4.23,2.42.98,4.32,2.62,5.81,4.74,3.1,4.39,4.5,9.29,4.65,14.61.42,14.83-1.88,29.23-6.8,43.24-2.91,8.28-6.45,16.28-11.18,23.71-4.75,7.46-10.45,14.09-17.36,19.68-6.56,5.33-13.81,9.36-22.11,11.43-7.56,1.89-15.1,1.94-22.64-.06-8.47-2.24-15.14-6.92-19.85-14.27-.48-.75-.99-1.48-1.5-2.21-.08-.12-.24-.16-.73-.47"/><path d="m711.65,159.35c-1.39,1.02-2.59,1.88-3.76,2.77-5.49,4.19-11.35,7.72-17.92,10.01-5.89,2.05-11.91,2.87-18.12,1.84-9.16-1.53-16.42-6.14-21.96-13.46-4.68-6.19-7.28-13.22-8.54-20.8-4.97-29.9,11.62-59.75,32.15-73.82,6.72-4.61,13.93-8.04,21.95-9.79,11.96-2.61,23.54-1.32,34.71,3.41,2.78,1.17,5.26,1.57,8.17.65,3.41-1.08,6.96-1.76,10.45-2.57,1.31-.3,2.64-.63,3.97-.68,3.28-.1,5.36,2.23,4.89,5.43-.24,1.61-.68,3.18-1.06,4.77-5.95,25.09-11.92,50.18-17.84,75.28-.44,1.85-.68,3.81-.6,5.7.2,4.47,2.9,7.06,7.46,7.23,2.08.07,4.17-.27,6.26-.46.44-.04.87-.2,1.31-.28,3.76-.72,5.97-.05,7.06,2.16,1.26,2.54,0,6.93-2.53,8.77-.6.44-1.27.78-1.94,1.1-6.79,3.21-13.82,5.67-21.36,6.48-3.79.41-7.48-.14-11.04-1.37-4.29-1.48-7.47-4.28-9.61-8.24-.69-1.28-1.33-2.57-2.13-4.12m-43.7-29.39c0,2.22-.22,4.47.04,6.66.68,5.72,2.69,10.93,6.73,15.21,4.13,4.38,9.3,6.1,15.1,4.65,7.98-2.01,14.97-5.94,20.55-12.09,1.83-2.02,3.05-4.32,3.68-7.01,3.97-16.88,8.01-33.75,12.01-50.62.27-1.15.53-2.32.61-3.49.53-7.11-3.92-13.15-10.91-14.78-3.08-.71-6.18-.87-9.36-.44-7.79,1.07-14.11,4.7-19.22,10.5-7.18,8.16-12.45,17.39-15.61,27.76-2.34,7.71-3.61,15.59-3.65,23.63"/><path d="m71.19,159.3c-2,1.51-3.53,2.69-5.08,3.84-5.19,3.83-10.73,7.04-16.87,9.13-16.87,5.73-33.54-.36-42.48-15.62-1.56-2.67-2.78-5.58-3.85-8.49C.45,141.51-.25,134.56.07,127.57c1.22-25.87,12.31-46.66,33.4-62.04,9.27-6.76,19.87-10.29,31.36-10.75,8.62-.34,17.02,1.19,24.9,4.75,2.78,1.26,5.3,1.46,8.19.6,3.86-1.15,7.85-1.87,11.75-2.92,5.21-1.4,8.54,1.08,7.15,6.91-2.51,10.52-4.96,21.05-7.46,31.57-3.67,15.42-7.39,30.82-11.06,46.24-.58,2.45-1,4.92-.46,7.48.72,3.37,2.46,5.39,5.94,5.68,2.79.23,5.65-.2,8.47-.4,1.04-.07,2.05-.5,3.08-.53,2.9-.1,5.16,2.24,4.96,5.09-.23,3.31-1.47,5.91-4.8,7.38-6.72,2.97-13.55,5.5-20.92,6.39-3.65.44-7.18.01-10.65-.97-4.86-1.37-8.4-4.42-10.75-8.82-.61-1.15-1.18-2.33-2-3.95m-44.11-29.21c0,1.48-.12,2.97.02,4.44.57,6.01,2.31,11.63,6.29,16.34,4.59,5.42,10.4,7.29,17.3,5.29,6.55-1.91,12.39-5.14,17.39-9.79,3-2.81,5.05-6.07,5.96-10.19,2.17-9.83,4.65-19.58,6.96-29.38,1.73-7.35,3.54-14.68,5.03-22.08,1.53-7.61-3.35-14.61-10.99-16.29-2.95-.65-5.9-.78-8.91-.37-8.1,1.09-14.64,4.88-19.89,10.99-12.62,14.72-18.29,32-19.13,51.04"/><path d="m555.43,126.18c-.18,6.31.75,11.79,2.66,17.16,3.05,8.6,12.6,15.29,23.55,13.97,9.92-1.2,17.65-6.1,24.23-13.17,1.62-1.74,3.15-3.58,4.61-5.46,2.78-3.6,6.11-3.58,9.19-.67.32.31.67.59,1.02.87,1.95,1.53,2.31,4.22,1.22,6.47-.25.53-.61,1.02-.96,1.5-9.01,11.96-20.26,20.93-34.89,25.28-8.29,2.47-16.75,3.04-25.31,1.52-16.48-2.93-26.72-12.65-30.81-28.52-3.61-13.99-2.84-27.91,2.03-41.57,3.73-10.44,8.84-20.1,16.4-28.36,8.87-9.71,19.57-16.47,32.61-19.28,8.28-1.78,16.63-2.06,24.97-.45,2.33.45,4.66,1.15,6.86,2.05,11.29,4.62,17.02,14.82,15.37,26.77-1.39,10.14-6.32,18.04-14.72,23.92-7.56,5.29-15.98,8.76-24.88,10.97-8.26,2.06-16.65,3.62-24.98,5.39-2.61.55-5.23,1.04-8.13,1.62m.9-14.27c1.05.19,1.49.39,1.89.33,7.97-1.23,15.96-2.53,23.51-5.42,11.01-4.21,18.35-11.89,21.34-23.36.72-2.77.94-5.57.43-8.36-.66-3.65-2.66-6.23-6.51-7.03-1.16-.24-2.36-.42-3.54-.47-4.96-.18-9.4,1.44-13.51,4.05-4.06,2.59-7.42,5.95-10.35,9.72-6.01,7.74-9.94,16.45-12.26,25.9-.35,1.42-.62,2.85-1,4.63"/><path d="m926.94,126.46c.03,6.97,1,13.38,3.97,19.33,3.82,7.66,12.43,12.31,21.11,11.65,5.79-.44,11.13-2.2,16.01-5.32,3.42-2.19,6.47-4.79,9.15-7.83,1.78-2.01,3.5-4.06,5.32-6.03,2.72-2.96,4.93-3.14,8.22-.76.48.35.97.7,1.42,1.09,2.6,2.27,2.98,4.56,1.07,7.47-2.55,3.86-5.63,7.31-9.01,10.49-8.52,8.02-18.26,13.87-29.84,16.44-8.92,1.98-17.84,2.11-26.66-.38-11.57-3.26-19.56-10.58-24.06-21.56-1.12-2.72-1.89-5.62-2.53-8.51-3.42-15.45-1.35-30.36,4.81-44.8,4.06-9.51,9.41-18.2,16.95-25.45,8.46-8.12,18.25-13.91,29.85-16.37,9.49-2.01,19.03-2.28,28.45.41,6.88,1.96,12.43,5.76,15.97,12.1,1.47,2.63,2.4,5.41,2.68,8.41,1.13,11.96-2.78,21.86-12.25,29.5-5.04,4.07-10.73,7.01-16.73,9.4-8.38,3.35-17.14,5.24-25.96,6.97-4.99.98-10,1.88-14.99,2.85-.86.17-1.69.51-2.94.9m1.31-13.98c2.7-.42,4.76-.68,6.79-1.05,6.02-1.09,12.06-2.2,17.79-4.36,11.89-4.48,19.55-12.71,22.27-25.17.25-1.15.45-2.34.44-3.5-.06-7.21-3.36-10.75-10.58-10.81-5.12-.04-9.66,1.65-13.84,4.44-4.14,2.76-7.5,6.32-10.45,10.26-5.89,7.83-9.62,16.63-11.88,26.09-.27,1.12-.3,2.29-.53,4.12"/><path d="m887.37,79.25c-1.15,21.14-5.78,40.42-16.13,58.13-3.39,5.8-7.39,11.15-11.96,16.09-10.96,11.86-24.56,18.71-40.64,20.66-4.6.56-9.26.56-13.84-.58-11.56-2.86-21.25-10.56-22.36-26.6-.35-5.05.17-10.07,1.45-14.98,3.86-14.92,7.72-29.84,11.56-44.77.51-2,1.07-4.04,1.19-6.09.31-5.01-2.16-7.56-7.16-7.47-1.93.03-3.85.45-5.77.74-1.33.2-2.64.61-3.97.73-3.4.33-5.8-2.09-5.41-5.43.36-3.11,1.53-5.55,4.81-6.86,5.69-2.27,11.34-4.63,17.34-6.05,3.83-.91,7.69-1.12,11.59-.65,7.97.97,13.25,6.08,14.72,13.95.87,4.65.33,9.16-.77,13.65-3.84,15.69-7.77,31.35-11.59,47.05-.73,3.01-1.27,6.1-1.56,9.18-.21,2.18-.09,4.46.29,6.62,1.07,6.13,5.37,9.32,10.73,9.48,11.58.33,21.63-3.43,29.43-11.82,8.35-8.97,14.09-19.55,16.16-31.72.89-5.23,1.76-10.53.88-15.91-.42-2.55-1.2-4.89-2.7-6.98-1.65-2.29-3.36-4.55-5.01-6.84-1.13-1.56-2.36-3.08-3.3-4.76-4.16-7.43-1.71-16.28,5.72-20.95,7.1-4.46,16.35-2.96,21.39,3.5,2.15,2.76,3.45,5.92,3.94,9.33.48,3.36.72,6.76.98,9.31"/><path d="m288.21,75.61c-2.05.96-3.41,1.51-4.69,2.21-6.08,3.33-11.35,7.68-16.32,12.44-1.66,1.59-2.08,3.55-2.56,5.54-2.5,10.37-4.96,20.75-7.42,31.14-3.11,13.12-6.23,26.24-9.28,39.37-1.16,4.99-2.25,6.47-7.94,6.29-3.59-.12-7.19-.02-10.78-.02-.89,0-1.8.04-2.69-.05-3.3-.36-5.1-2.62-4.54-5.82.4-2.34.96-4.64,1.5-6.96,5.54-24.12,11.09-48.24,16.61-72.36.63-2.75,1.18-5.51.41-8.35-.8-2.97-2.2-4.31-5.35-4.37-1.93-.04-3.88.23-5.79.51-1.77.26-3.49.85-5.27,1.1-3.67.51-5.97-1.87-5.59-5.57.33-3.2,1.67-5.44,4.95-6.7,6.43-2.46,12.74-5.26,19.59-6.31,2.93-.45,5.97-.64,8.93-.48,7.75.43,13.12,4.98,15.07,12.39.29,1.11.64,2.2.98,3.41,1.95-.52,3-1.84,4.24-2.84,4.79-3.8,9.57-7.61,14.85-10.75,2.98-1.78,6.16-3.01,9.59-3.63,9.95-1.8,18.65,3.18,21.87,12.7,2.05,6.04,2.51,12.24.43,18.35-3.04,8.93-12.15,13.17-20.96,9.94-6.75-2.47-10.95-8.87-10.47-15.98.05-.74.19-1.47.28-2.21.09-.72.17-1.44.35-3.01"/><path d="m143.59,155.29c.6-3.5,1.02-7.03,1.84-10.48,4.51-19.03,9.14-38.04,13.66-57.07.61-2.58,1.11-5.24,1.22-7.88.18-4.64-2.62-7.12-7.35-6.71-2.23.2-4.42.76-6.64,1.1-1.47.22-2.97.5-4.45.46-2.26-.05-3.97-1.73-4.06-3.96-.14-3.74.98-6.79,4.64-8.3,6.92-2.85,13.84-5.63,21.34-6.66,3.6-.49,7.16-.42,10.71.4,6.98,1.62,11.47,6.38,12.58,13.43.73,4.6.47,9.15-.66,13.67-3.56,14.23-7.11,28.47-10.65,42.7-1.47,5.89-2.98,11.79-4.29,17.72-.47,2.14-.59,4.41-.5,6.6.12,2.85,1.7,5.24,5.15,5.79,2.69.42,5.33.7,8.03.2,1.62-.3,3.25-.62,4.89-.7,3.33-.16,5.37,1.94,5.2,5.21-.18,3.39-1.56,5.81-5,7.13-6.3,2.41-12.61,4.71-19.24,6.02-4.14.81-8.33.92-12.46-.21-9.02-2.46-13.77-8.89-13.96-18.47"/><path d="m186.21,0c9.8-.02,17.39,7.37,17.44,17.03.05,10.09-7.96,17.61-17.56,17.49-10.53-.14-16.92-9.13-17-17.16-.11-9.34,7.69-17.61,17.12-17.35Z"/></svg><small>for Schools</small></a>
+    <ul>
+      <li><a href="#schools">Schools</a></li>
+      <li><a href="#science">Science</a></li>
+      <li><a href="#evidence">Evidence</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="t-eyebrow">Boarding &amp; Residential Life</div>
+    <h1 class="t-h1">A third of every school year<br>happens in bed.</h1>
+    <p class="sub">The world’s most demanding schools — in ballet, in sport, in leadership — have redesigned that third. This is what they chose, and the science behind it.</p>
+    <span class="jp">学びの三分の一は、眠りの中にある。</span>
+    <div class="pills"><a class="pill light" href="#schools">Our partner schools</a><a class="pill light" href="#science">The science</a></div>
+  </div>
+  <div class="credit">Photo: Opéra national de Paris — Ballet School</div>
+</header>
+
+<div class="band-dark">
+  <div class="wrap">
+    <div class="t-eyebrow">Trusted in the dormitories of</div>
+    <div class="logo-row">
+      <img src="https://www.operadeparis.fr/images/footer/opera_logo_text_white.svg" alt="Opéra national de Paris — Ballet School">
+      <img src="https://www.royalballetschool.org.uk/wp-content/uploads/2022/07/RBS-logo-main-large.svg" alt="The Royal Ballet School">
+      <svg class="w" role="img" aria-label="IMG Academy" viewBox="0 0 250 30" xmlns="http://www.w3.org/2000/svg" style="height:24px"><path d="M10.3465 0L8.89035 13.6048L7.63158 25.3634L7.55263 26.0706L7.29825 19.2491L6.57895 4.21736L3.24123 24.5801L3.52632 7.57939L0 24.796L10.3465 30L20.6974 24.796L17.1667 7.57939L17.4561 24.6267L17.4386 24.6351L14.0219 4.13691L13.3991 19.2491L13.1447 26.0706L13.0702 25.3634L11.807 13.6048L10.3465 0Z" fill="#fff"/><path d="M50.8903 23.2639L49.3684 23.0056L50.307 13.5081L54.8026 26.1602H60.9342L65.1667 13.5378L66.0746 23.0056L64.5526 23.2639L64.1667 26.1602H73.9298L73.5439 23.2639L72.0219 23.0056L70.8202 10.4213L72.3421 10.163L72.7281 7.26676H62.6316L58.6228 19.0974L54.3684 7.24982H44.886L45.2719 10.1461L46.7939 10.4044L45.4123 23.0056L43.8903 23.2639L43.5044 26.1602H51.2719L50.8816 23.2639H50.8903ZM41.8114 10.163L42.1974 7.26676H32.4298L32.8202 10.163L34.3421 10.4213V23.0056L32.8202 23.2639L32.4298 26.1602H42.1974L41.8114 23.2639L40.2939 23.0056V10.4213L41.8114 10.163ZM91.6886 16.0064H84.2719V18.53L86.7281 19.1821V23.0395C86.7281 23.0395 83.9298 23.0861 83.2895 22.9972C82.6447 22.9125 80.5088 22.6542 80.5088 16.3917C80.5088 10.1291 83.886 10.3874 85.3553 10.3874C86.8246 10.3874 88.3289 10.5568 88.3289 10.5568L88.7149 13.4319H91.4079L91.7982 7.47001C91.7982 7.47001 90.4868 7 84.2412 7C77.9956 7 74.1096 8.79958 74.1096 17.0353C74.1096 25.271 78.0219 26.5201 83.4386 26.5201H92.0702L91.6842 16.0106L91.6886 16.0064Z" fill="#fff"/><path d="M184.961 9.3585H187.645V24.3606H184.961V26.3042H201.496V20.3507H199.474V24.3606H190.289V17.6704H194.781V20.4058H196.794V12.9323H194.781V15.7269H190.289V9.3585H199.474V13.1059H201.496V7.41073H184.961V9.3585ZM216.588 22.9591L210.956 7.41073H203.82V9.3585H206.346V24.3606H203.82V26.3042H211.535V24.3606H209V9.3585H209.092L215.355 26.3042H217.614L223.969 9.3585H224.149V24.3606H221.465V26.3042H229.452V24.3606H226.794V9.3585H229.452V7.41073H222.276L216.588 22.9591ZM242.711 9.3585H245.513L240.693 16.163L235.724 9.3585H238.518V7.41073H231.114V9.3585H232.706L239.097 18.3733V24.3606H235.842V26.3042H244.996V24.3606H241.746V18.3945L248.395 9.35427H250V7.40649H242.711V9.35427V9.3585ZM113.496 7.41073H110.518L102.987 24.3606H100.816V26.3042H108.496V24.3606H105.605L107.447 20.1729H116.268L117.925 24.3606H115.123V26.3042H123.039V24.3606H120.877L113.496 7.41073ZM108.285 18.2251L111.868 10.0529L115.421 18.2251H108.285ZM173.592 7.41073H164.925V9.3585H167.601V24.3606H164.925V26.3042H173.592C180.246 26.3042 183.895 22.9294 183.895 16.8617C183.895 10.7939 180.246 7.41073 173.592 7.41073ZM173.592 24.3606H170.25V9.3585H173.592C178.351 9.3585 181.123 12.06 181.123 16.8617C181.123 21.6634 178.347 24.3606 173.592 24.3606ZM153.715 7.41073H150.737L143.202 24.3606H141.035V26.3042H148.711V24.3606H145.82L147.667 20.1729H156.482L158.14 24.3606H155.342V26.3042H163.259V24.3606H161.092L153.715 7.41073ZM148.504 18.2251L152.079 10.0529L155.636 18.2251H148.5H148.504ZM132.342 24.7078C127.974 24.7078 125.289 21.7989 125.289 16.6542C125.289 11.8821 127.969 8.94354 132.276 8.94354C135.588 8.94354 137.816 10.8998 138.057 14.0628H140.32V7.40649H138.18V9.56175C136.518 7.78335 134.566 7 131.974 7C126.224 7 122.522 10.7474 122.522 16.8829C122.522 23.0184 126.167 26.7107 132.158 26.7107C137.189 26.7107 140.075 24.3225 140.531 19.9019H137.763C137.154 23.0438 135.294 24.7036 132.346 24.7036" fill="#fff"/></svg>
+      <img class="w" src="https://uwcisak.jp/wpdata/wp-content/uploads/2023/01/logo-light-new.svg" alt="UWC ISAK Japan">
+    </div>
+  </div>
+</div>
+
+<div class="band-navy">
+  <div class="wrap stats">
+    <div class="stat"><div class="n">2013</div><div class="t">First school dormitory partnership<br>Paris Opera Ballet School</div></div>
+    <div class="stat"><div class="n">500</div><div class="t">Student beds<br>IMG Academy, Florida</div></div>
+    <div class="stat"><div class="n">3</div><div class="t">Olympic Villages<br>Tokyo · Paris · Milano Cortina</div></div>
+    <div class="stat"><div class="n">2</div><div class="t">Peer‑reviewed studies<br>with Stanford researchers</div></div>
+  </div>
+</div>
+
+<!-- SCHOOLS -->
+<section id="schools">
+  <div class="wrap head center">
+    <div class="t-eyebrow">Partner Schools</div>
+    <h2 class="t-h2" style="margin-top:12px">Where excellence is non‑negotiable,<br>recovery is designed.</h2>
+    <p class="t-body">Each of these institutions asks its students to perform at a world level, every day. Each has made sleep part of its care.</p>
+  </div>
+
+  <div class="split">
+    <div class="media" style="background-image:url('https://res.cloudinary.com/opera-national-de-paris/image/upload/w_2400,c_limit,q_auto,f_jpg/v1/recette/t1oq8bwbbyvydfxguzot')"></div>
+    <div class="text white">
+      <img class="lg" src="https://www.operadeparis.fr/images/footer/opera_logo_text_white.svg" alt="Opéra national de Paris">
+      <div class="t-eyebrow">Paris · France · since 2013</div>
+      <h3 class="t-h2">Paris Opera Ballet School</h3>
+      <ul class="facts">
+        <li>Official partnership since August 2023</li>
+        <li>150 dormitory beds with customisable, three‑section mattresses</li>
+        <li>Scholarships for the school’s summer programme</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="split rev">
+    <div class="media" style="background-image:url('https://www.royalballetschool.org.uk/wp-content/uploads/2025/10/Intensives.jpg')"></div>
+    <div class="text grey">
+      <img class="lg" src="https://www.royalballetschool.org.uk/wp-content/uploads/2022/07/RBS-logo-main-large.svg" alt="The Royal Ballet School">
+      <div class="t-eyebrow">London · United Kingdom</div>
+      <h3 class="t-h2">The Royal Ballet School</h3>
+      <ul class="facts">
+        <li>airweave in student residential accommodation</li>
+        <li>Young dancers training at professional intensity</li>
+        <li>Recovery treated as part of artistic development</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="split">
+    <div class="media" style="background-image:url('https://www.imgacademy.com/shared/footer-background-DeuAYFqL.webp')"></div>
+    <div class="text white">
+      <svg class="lg w" role="img" aria-label="IMG Academy" viewBox="0 0 250 30" xmlns="http://www.w3.org/2000/svg" style="height:22px"><path d="M10.3465 0L8.89035 13.6048L7.63158 25.3634L7.55263 26.0706L7.29825 19.2491L6.57895 4.21736L3.24123 24.5801L3.52632 7.57939L0 24.796L10.3465 30L20.6974 24.796L17.1667 7.57939L17.4561 24.6267L17.4386 24.6351L14.0219 4.13691L13.3991 19.2491L13.1447 26.0706L13.0702 25.3634L11.807 13.6048L10.3465 0Z" fill="#fff"/><path d="M50.8903 23.2639L49.3684 23.0056L50.307 13.5081L54.8026 26.1602H60.9342L65.1667 13.5378L66.0746 23.0056L64.5526 23.2639L64.1667 26.1602H73.9298L73.5439 23.2639L72.0219 23.0056L70.8202 10.4213L72.3421 10.163L72.7281 7.26676H62.6316L58.6228 19.0974L54.3684 7.24982H44.886L45.2719 10.1461L46.7939 10.4044L45.4123 23.0056L43.8903 23.2639L43.5044 26.1602H51.2719L50.8816 23.2639H50.8903ZM41.8114 10.163L42.1974 7.26676H32.4298L32.8202 10.163L34.3421 10.4213V23.0056L32.8202 23.2639L32.4298 26.1602H42.1974L41.8114 23.2639L40.2939 23.0056V10.4213L41.8114 10.163ZM91.6886 16.0064H84.2719V18.53L86.7281 19.1821V23.0395C86.7281 23.0395 83.9298 23.0861 83.2895 22.9972C82.6447 22.9125 80.5088 22.6542 80.5088 16.3917C80.5088 10.1291 83.886 10.3874 85.3553 10.3874C86.8246 10.3874 88.3289 10.5568 88.3289 10.5568L88.7149 13.4319H91.4079L91.7982 7.47001C91.7982 7.47001 90.4868 7 84.2412 7C77.9956 7 74.1096 8.79958 74.1096 17.0353C74.1096 25.271 78.0219 26.5201 83.4386 26.5201H92.0702L91.6842 16.0106L91.6886 16.0064Z" fill="#fff"/><path d="M184.961 9.3585H187.645V24.3606H184.961V26.3042H201.496V20.3507H199.474V24.3606H190.289V17.6704H194.781V20.4058H196.794V12.9323H194.781V15.7269H190.289V9.3585H199.474V13.1059H201.496V7.41073H184.961V9.3585ZM216.588 22.9591L210.956 7.41073H203.82V9.3585H206.346V24.3606H203.82V26.3042H211.535V24.3606H209V9.3585H209.092L215.355 26.3042H217.614L223.969 9.3585H224.149V24.3606H221.465V26.3042H229.452V24.3606H226.794V9.3585H229.452V7.41073H222.276L216.588 22.9591ZM242.711 9.3585H245.513L240.693 16.163L235.724 9.3585H238.518V7.41073H231.114V9.3585H232.706L239.097 18.3733V24.3606H235.842V26.3042H244.996V24.3606H241.746V18.3945L248.395 9.35427H250V7.40649H242.711V9.35427V9.3585ZM113.496 7.41073H110.518L102.987 24.3606H100.816V26.3042H108.496V24.3606H105.605L107.447 20.1729H116.268L117.925 24.3606H115.123V26.3042H123.039V24.3606H120.877L113.496 7.41073ZM108.285 18.2251L111.868 10.0529L115.421 18.2251H108.285ZM173.592 7.41073H164.925V9.3585H167.601V24.3606H164.925V26.3042H173.592C180.246 26.3042 183.895 22.9294 183.895 16.8617C183.895 10.7939 180.246 7.41073 173.592 7.41073ZM173.592 24.3606H170.25V9.3585H173.592C178.351 9.3585 181.123 12.06 181.123 16.8617C181.123 21.6634 178.347 24.3606 173.592 24.3606ZM153.715 7.41073H150.737L143.202 24.3606H141.035V26.3042H148.711V24.3606H145.82L147.667 20.1729H156.482L158.14 24.3606H155.342V26.3042H163.259V24.3606H161.092L153.715 7.41073ZM148.504 18.2251L152.079 10.0529L155.636 18.2251H148.5H148.504ZM132.342 24.7078C127.974 24.7078 125.289 21.7989 125.289 16.6542C125.289 11.8821 127.969 8.94354 132.276 8.94354C135.588 8.94354 137.816 10.8998 138.057 14.0628H140.32V7.40649H138.18V9.56175C136.518 7.78335 134.566 7 131.974 7C126.224 7 122.522 10.7474 122.522 16.8829C122.522 23.0184 126.167 26.7107 132.158 26.7107C137.189 26.7107 140.075 24.3225 140.531 19.9019H137.763C137.154 23.0438 135.294 24.7036 132.346 24.7036" fill="#fff"/></svg>
+      <div class="t-eyebrow">Florida · USA · since 2014</div>
+      <h3 class="t-h2">IMG Academy</h3>
+      <ul class="facts">
+        <li>Every bed in the new residence hall — approx. 500</li>
+        <li>Partnership extended in 2016</li>
+        <li>Site of the Stanford‑led athletic performance study</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="split rev">
+    <div class="media" style="background-image:url('https://uwcisak.jp/wpdata/wp-content/uploads/2023/08/home-slide-3-min.jpg')"></div>
+    <div class="text grey">
+      <img class="lg w" src="https://uwcisak.jp/wpdata/wp-content/uploads/2023/01/logo-light-new.svg" alt="UWC ISAK Japan">
+      <div class="t-eyebrow">Karuizawa · Japan · since 2014</div>
+      <h3 class="t-h2">UWC ISAK Japan</h3>
+      <ul class="facts">
+        <li>Every dormitory bed since the school opened</li>
+        <li>Students from around the world · UWC movement member</li>
+        <li>Letter of appreciation awarded to airweave</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="band-dark">
+  <div class="wrap games">
+    <div class="lead">Chosen for the athletes of three Olympic Games — then given a second life in student residences.</div>
+    <div class="game"><div class="y">Tokyo 2020</div><div class="d">Olympic &amp; Paralympic Village</div></div>
+    <div class="game"><div class="y">Paris 2024</div><div class="d">Village beds reused in France after the Games</div></div>
+    <div class="game"><div class="y">Milano Cortina 2026</div><div class="d">Village bedding reused in student dormitories</div></div>
+  </div>
+</div>
+
+<!-- SCIENCE -->
+<section id="science" class="sci">
+  <div class="wrap head center" style="padding-bottom:40px">
+    <div class="t-eyebrow">The Science of Sleep</div>
+    <h2 class="t-h2" style="margin-top:12px">What sleep science recommends</h2>
+  </div>
+  <div class="wrap sci-grid">
+    <aside class="prof">
+      <img src="https://www.tsukuba.ac.jp/en/news/images/yanagisawa-20260909.jpg" alt="Prof. Masashi Yanagisawa">
+      <div class="prof-body">
+        <div class="pill solid tag">2026 Lasker Award</div>
+        <div class="prof-name">Prof. Masashi Yanagisawa</div>
+        <div class="jp prof-jp">柳沢 正史 · University of Tsukuba</div>
+        <p>Discovered orexin, the brain molecule that keeps us awake. Chairman of the sleep‑science company S’UIMIN.</p>
+      </div>
+    </aside>
+    <div class="pairs">
+      <div class="pair-h"><span>His company S’UIMIN recommends</span><span>How airweave delivers it</span></div>
+      <div class="pair">
+        <div class="adv">“Unsuitable bedding makes sleep worse. A sagging mattress forces an unnatural posture.”</div>
+        <div class="feat"><b>Easy to turn over</b><span>High‑rebound fibre supports the body evenly — 53–66% less muscle effort when turning over.</span></div>
+      </div>
+      <div class="pair">
+        <div class="adv">“Keep the bedroom temperature constant all night.”</div>
+        <div class="feat"><b>Breathable, cooler sleep</b><span>An open fibre structure lets heat and moisture escape.</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="wrap"><p class="small-note">Advice translated from S’UIMIN Inc.’s sleep‑environment guide (suimin.co.jp). General guidance, not a product endorsement; Prof. Yanagisawa is not affiliated with airweave. Photo: University of Tsukuba.</p></div>
+</section>
+
+<div class="split rev">
+  <div class="media" style="background-image:url('https://airweave.com/cdn/shop/files/CUBE_ABOVE_PLINTH_01_1.png');background-color:#d9d9d9"></div>
+  <div class="text navy">
+    <div class="t-eyebrow">Japanese Innovation</div>
+    <h2 class="t-h2">airfiber®</h2>
+    <p class="t-body">Designed and made in Japan. A resilient, open fibre structure that lets air move freely, supports the body evenly and can be rinsed clean with water.</p>
+    <div class="pills"><a class="pill light" href="https://airweave.com/pages/brand" target="_blank" rel="noopener">About airweave</a></div>
+  </div>
+</div>
+
+<!-- EVIDENCE -->
+<section id="evidence" class="evidence">
+  <div class="wrap head center" style="padding-bottom:40px">
+    <div class="t-eyebrow">Peer‑reviewed evidence</div>
+    <h2 class="t-h2" style="margin-top:12px">What changes on airweave</h2>
+  </div>
+  <div class="wrap ev-grid">
+    <article class="ev" data-anim>
+      <svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><path d="M30 6a18 18 0 1 0 12 30A15 15 0 0 1 30 6z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+      <div class="ev-k">Deep sleep</div>
+      <div class="ev-big"><span class="count" data-to="5">5</span>×</div>
+      <div class="ev-sub">more deep sleep in the first two hours</div>
+      <div class="bars">
+        <div class="bar"><i class="aw" style="--w:94%"></i><em>9.4 min</em></div>
+        <div class="bar"><i class="cmp" style="--w:19%"></i><em>1.9 min</em></div>
+      </div>
+      <div class="ev-src">PLOS ONE 2018 · young adults</div>
+    </article>
+    <article class="ev" data-anim>
+      <svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><path d="M20 8a4 4 0 0 1 8 0v20a9 9 0 1 1-8 0z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="35" r="4" fill="currentColor"/><path d="M24 31V16" stroke="currentColor" stroke-width="2"/></svg>
+      <div class="ev-k">Body temperature</div>
+      <div class="ev-big">−0.<span class="count" data-to="3">3</span>°C</div>
+      <div class="ev-sub">lower core temperature — the body’s signal for deep sleep</div>
+      <div class="scale">
+        <div class="track"></div>
+        <span class="dot aw" style="--x:13%"><b>36.05°C</b></span>
+        <span class="dot cmp" style="--x:88%"><b>36.35°C</b></span>
+      </div>
+      <div class="ev-src">PLOS ONE 2018 · young adults</div>
+    </article>
+    <article class="ev" data-anim>
+      <svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="27" r="15" fill="none" stroke="currentColor" stroke-width="2"/><path d="M24 27V18M20 6h8M24 6v6" stroke="currentColor" stroke-width="2"/></svg>
+      <div class="ev-k">Next‑day performance</div>
+      <div class="ev-big"><span class="count" data-to="5.5" data-dec="1">5.5</span>%</div>
+      <div class="ev-sub">faster agility for student‑athletes</div>
+      <div class="bars">
+        <div class="bar"><i class="aw" style="--w:94.5%"></i><em>31.0 s</em></div>
+        <div class="bar"><i class="cmp" style="--w:100%"></i><em>32.8 s</em></div>
+      </div>
+      <div class="ev-src">Scientific Reports 2020 · IMG Academy</div>
+    </article>
+  </div>
+  <div class="wrap">
+    <div class="ev-legend"><span><i class="aw"></i>airweave</span><span><i class="cmp"></i>Comparison surface</span></div>
+    <div class="pills"><a class="pill light" href="https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0197521" target="_blank" rel="noopener">PLOS ONE 2018</a><a class="pill light" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7366624" target="_blank" rel="noopener">Scientific Reports 2020</a></div>
+    <p class="transp center">Studies led by Stanford sleep researchers and funded by airweave; small samples.</p>
+  </div>
+</section>
+
+<!-- WHY -->
+<section id="why">
+  <div class="wrap head center">
+    <div class="t-eyebrow">For Heads of Boarding</div>
+    <h2 class="t-h2" style="margin-top:12px">Why the bed is a pastoral‑care decision</h2>
+  </div>
+  <div class="wrap why">
+    <div class="card"><div class="num">01</div><h4>Teenagers sleep less than they need</h4><p>Adolescents need 8–10 hours. Boarding schools are the only institutions that fully control the environment in which those hours happen.</p></div>
+    <div class="card"><div class="num">02</div><h4>One bed, many bodies</h4><p>Dormitory beds serve a new student every year. Adjustable, washable, breathable surfaces adapt to growing bodies and meet hygiene standards.</p></div>
+    <div class="card"><div class="num">03</div><h4>Parents ask about wellbeing</h4><p>Families choosing a world‑class school now ask how it cares for the whole child. Sleep is a visible, measurable answer.</p></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div class="t-eyebrow">Contact</div>
+    <div class="name">Yuta Mizuno</div>
+    <div class="role">Head of Business Development, Public Relations &amp; President’s Office</div>
+    <div class="addr">airweave Inc. · Shin‑Otemachi Building 8F, 2‑2‑1 Otemachi, Chiyoda‑ku, Tokyo 100‑0004</div>
+    <a class="mail" href="mailto:yuta_mizuno@airweave.jp">yuta_mizuno@airweave.jp</a>
+    <div class="pills"><a class="pill light" href="mailto:yuta_mizuno@airweave.jp?subject=airweave%20for%20Schools%20-%20Enquiry">Contact us</a></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <svg class="aw-logo" role="img" aria-label="airweave" viewBox="0 0 1000 174.58" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="m413.08,155.91c-1.24,1.12-2.34,2.11-3.44,3.09-5.02,4.5-10.44,8.43-16.58,11.32-5.47,2.57-11.16,4.18-17.3,4.17-3.95,0-7.76-.67-11.43-2.02-11.59-4.28-17.69-12.71-18.76-24.78-.46-5.2.01-10.37,1.32-15.44,3.59-13.93,7.19-27.84,10.76-41.76.7-2.73,1.38-5.47,1.81-8.25.93-6.04-1.84-9.03-8.01-8.74-1.63.08-3.23.55-4.85.85-1.32.25-2.64.65-3.97.74-2.95.2-5.25-1.91-5.26-4.81-.01-2.94.63-5.74,3.65-7.07,7.53-3.33,15.12-6.46,23.41-7.48,3.33-.41,6.61-.1,9.77.87,6.45,1.97,10.25,6.36,11.54,12.92.93,4.75.53,9.44-.62,14.1-3.24,13.09-6.51,26.18-9.75,39.27-.92,3.74-1.8,7.49-2.66,11.25-.87,3.79-1.03,7.63-.56,11.49.14,1.16.42,2.34.81,3.45,1.88,5.32,6.14,8.02,11.82,7.43,1.92-.2,3.84-.62,5.7-1.15,5.4-1.53,10.22-4.18,14.57-7.66,3.48-2.79,5.82-6.17,6.79-10.65,2.3-10.72,4.88-21.38,7.37-32.06,3.24-13.85,6.5-27.7,9.75-41.55.17-.72.3-1.45.52-2.16,1.04-3.45,2.06-4.27,5.78-4.34,4.64-.07,9.28-.03,13.93,0,1.35,0,2.69.07,3.84.96,1.88,1.45,2.38,3.35,1.9,5.55-.62,2.9-1.33,5.77-2.01,8.66-5,21.51-9.98,43.02-15.01,64.52-.79,3.38-1.03,6.7-.14,10.11,1.28,4.89,4.27,7.99,9.24,9.29,4.51,1.17,8.92.66,13.28-.59,6.04-1.73,11.26-4.96,15.54-9.42,12.71-13.25,19.82-28.76,18.89-47.38-.13-2.72-.73-5.32-2.1-7.65-1.58-2.68-3.37-5.24-5.11-7.84-1.08-1.6-2.33-3.09-3.32-4.75-3.59-6.06-2.89-13.57,1.65-18.64,5.35-5.99,13.4-6.47,18.91-4.23,2.42.98,4.32,2.62,5.81,4.74,3.1,4.39,4.5,9.29,4.65,14.61.42,14.83-1.88,29.23-6.8,43.24-2.91,8.28-6.45,16.28-11.18,23.71-4.75,7.46-10.45,14.09-17.36,19.68-6.56,5.33-13.81,9.36-22.11,11.43-7.56,1.89-15.1,1.94-22.64-.06-8.47-2.24-15.14-6.92-19.85-14.27-.48-.75-.99-1.48-1.5-2.21-.08-.12-.24-.16-.73-.47"/><path d="m711.65,159.35c-1.39,1.02-2.59,1.88-3.76,2.77-5.49,4.19-11.35,7.72-17.92,10.01-5.89,2.05-11.91,2.87-18.12,1.84-9.16-1.53-16.42-6.14-21.96-13.46-4.68-6.19-7.28-13.22-8.54-20.8-4.97-29.9,11.62-59.75,32.15-73.82,6.72-4.61,13.93-8.04,21.95-9.79,11.96-2.61,23.54-1.32,34.71,3.41,2.78,1.17,5.26,1.57,8.17.65,3.41-1.08,6.96-1.76,10.45-2.57,1.31-.3,2.64-.63,3.97-.68,3.28-.1,5.36,2.23,4.89,5.43-.24,1.61-.68,3.18-1.06,4.77-5.95,25.09-11.92,50.18-17.84,75.28-.44,1.85-.68,3.81-.6,5.7.2,4.47,2.9,7.06,7.46,7.23,2.08.07,4.17-.27,6.26-.46.44-.04.87-.2,1.31-.28,3.76-.72,5.97-.05,7.06,2.16,1.26,2.54,0,6.93-2.53,8.77-.6.44-1.27.78-1.94,1.1-6.79,3.21-13.82,5.67-21.36,6.48-3.79.41-7.48-.14-11.04-1.37-4.29-1.48-7.47-4.28-9.61-8.24-.69-1.28-1.33-2.57-2.13-4.12m-43.7-29.39c0,2.22-.22,4.47.04,6.66.68,5.72,2.69,10.93,6.73,15.21,4.13,4.38,9.3,6.1,15.1,4.65,7.98-2.01,14.97-5.94,20.55-12.09,1.83-2.02,3.05-4.32,3.68-7.01,3.97-16.88,8.01-33.75,12.01-50.62.27-1.15.53-2.32.61-3.49.53-7.11-3.92-13.15-10.91-14.78-3.08-.71-6.18-.87-9.36-.44-7.79,1.07-14.11,4.7-19.22,10.5-7.18,8.16-12.45,17.39-15.61,27.76-2.34,7.71-3.61,15.59-3.65,23.63"/><path d="m71.19,159.3c-2,1.51-3.53,2.69-5.08,3.84-5.19,3.83-10.73,7.04-16.87,9.13-16.87,5.73-33.54-.36-42.48-15.62-1.56-2.67-2.78-5.58-3.85-8.49C.45,141.51-.25,134.56.07,127.57c1.22-25.87,12.31-46.66,33.4-62.04,9.27-6.76,19.87-10.29,31.36-10.75,8.62-.34,17.02,1.19,24.9,4.75,2.78,1.26,5.3,1.46,8.19.6,3.86-1.15,7.85-1.87,11.75-2.92,5.21-1.4,8.54,1.08,7.15,6.91-2.51,10.52-4.96,21.05-7.46,31.57-3.67,15.42-7.39,30.82-11.06,46.24-.58,2.45-1,4.92-.46,7.48.72,3.37,2.46,5.39,5.94,5.68,2.79.23,5.65-.2,8.47-.4,1.04-.07,2.05-.5,3.08-.53,2.9-.1,5.16,2.24,4.96,5.09-.23,3.31-1.47,5.91-4.8,7.38-6.72,2.97-13.55,5.5-20.92,6.39-3.65.44-7.18.01-10.65-.97-4.86-1.37-8.4-4.42-10.75-8.82-.61-1.15-1.18-2.33-2-3.95m-44.11-29.21c0,1.48-.12,2.97.02,4.44.57,6.01,2.31,11.63,6.29,16.34,4.59,5.42,10.4,7.29,17.3,5.29,6.55-1.91,12.39-5.14,17.39-9.79,3-2.81,5.05-6.07,5.96-10.19,2.17-9.83,4.65-19.58,6.96-29.38,1.73-7.35,3.54-14.68,5.03-22.08,1.53-7.61-3.35-14.61-10.99-16.29-2.95-.65-5.9-.78-8.91-.37-8.1,1.09-14.64,4.88-19.89,10.99-12.62,14.72-18.29,32-19.13,51.04"/><path d="m555.43,126.18c-.18,6.31.75,11.79,2.66,17.16,3.05,8.6,12.6,15.29,23.55,13.97,9.92-1.2,17.65-6.1,24.23-13.17,1.62-1.74,3.15-3.58,4.61-5.46,2.78-3.6,6.11-3.58,9.19-.67.32.31.67.59,1.02.87,1.95,1.53,2.31,4.22,1.22,6.47-.25.53-.61,1.02-.96,1.5-9.01,11.96-20.26,20.93-34.89,25.28-8.29,2.47-16.75,3.04-25.31,1.52-16.48-2.93-26.72-12.65-30.81-28.52-3.61-13.99-2.84-27.91,2.03-41.57,3.73-10.44,8.84-20.1,16.4-28.36,8.87-9.71,19.57-16.47,32.61-19.28,8.28-1.78,16.63-2.06,24.97-.45,2.33.45,4.66,1.15,6.86,2.05,11.29,4.62,17.02,14.82,15.37,26.77-1.39,10.14-6.32,18.04-14.72,23.92-7.56,5.29-15.98,8.76-24.88,10.97-8.26,2.06-16.65,3.62-24.98,5.39-2.61.55-5.23,1.04-8.13,1.62m.9-14.27c1.05.19,1.49.39,1.89.33,7.97-1.23,15.96-2.53,23.51-5.42,11.01-4.21,18.35-11.89,21.34-23.36.72-2.77.94-5.57.43-8.36-.66-3.65-2.66-6.23-6.51-7.03-1.16-.24-2.36-.42-3.54-.47-4.96-.18-9.4,1.44-13.51,4.05-4.06,2.59-7.42,5.95-10.35,9.72-6.01,7.74-9.94,16.45-12.26,25.9-.35,1.42-.62,2.85-1,4.63"/><path d="m926.94,126.46c.03,6.97,1,13.38,3.97,19.33,3.82,7.66,12.43,12.31,21.11,11.65,5.79-.44,11.13-2.2,16.01-5.32,3.42-2.19,6.47-4.79,9.15-7.83,1.78-2.01,3.5-4.06,5.32-6.03,2.72-2.96,4.93-3.14,8.22-.76.48.35.97.7,1.42,1.09,2.6,2.27,2.98,4.56,1.07,7.47-2.55,3.86-5.63,7.31-9.01,10.49-8.52,8.02-18.26,13.87-29.84,16.44-8.92,1.98-17.84,2.11-26.66-.38-11.57-3.26-19.56-10.58-24.06-21.56-1.12-2.72-1.89-5.62-2.53-8.51-3.42-15.45-1.35-30.36,4.81-44.8,4.06-9.51,9.41-18.2,16.95-25.45,8.46-8.12,18.25-13.91,29.85-16.37,9.49-2.01,19.03-2.28,28.45.41,6.88,1.96,12.43,5.76,15.97,12.1,1.47,2.63,2.4,5.41,2.68,8.41,1.13,11.96-2.78,21.86-12.25,29.5-5.04,4.07-10.73,7.01-16.73,9.4-8.38,3.35-17.14,5.24-25.96,6.97-4.99.98-10,1.88-14.99,2.85-.86.17-1.69.51-2.94.9m1.31-13.98c2.7-.42,4.76-.68,6.79-1.05,6.02-1.09,12.06-2.2,17.79-4.36,11.89-4.48,19.55-12.71,22.27-25.17.25-1.15.45-2.34.44-3.5-.06-7.21-3.36-10.75-10.58-10.81-5.12-.04-9.66,1.65-13.84,4.44-4.14,2.76-7.5,6.32-10.45,10.26-5.89,7.83-9.62,16.63-11.88,26.09-.27,1.12-.3,2.29-.53,4.12"/><path d="m887.37,79.25c-1.15,21.14-5.78,40.42-16.13,58.13-3.39,5.8-7.39,11.15-11.96,16.09-10.96,11.86-24.56,18.71-40.64,20.66-4.6.56-9.26.56-13.84-.58-11.56-2.86-21.25-10.56-22.36-26.6-.35-5.05.17-10.07,1.45-14.98,3.86-14.92,7.72-29.84,11.56-44.77.51-2,1.07-4.04,1.19-6.09.31-5.01-2.16-7.56-7.16-7.47-1.93.03-3.85.45-5.77.74-1.33.2-2.64.61-3.97.73-3.4.33-5.8-2.09-5.41-5.43.36-3.11,1.53-5.55,4.81-6.86,5.69-2.27,11.34-4.63,17.34-6.05,3.83-.91,7.69-1.12,11.59-.65,7.97.97,13.25,6.08,14.72,13.95.87,4.65.33,9.16-.77,13.65-3.84,15.69-7.77,31.35-11.59,47.05-.73,3.01-1.27,6.1-1.56,9.18-.21,2.18-.09,4.46.29,6.62,1.07,6.13,5.37,9.32,10.73,9.48,11.58.33,21.63-3.43,29.43-11.82,8.35-8.97,14.09-19.55,16.16-31.72.89-5.23,1.76-10.53.88-15.91-.42-2.55-1.2-4.89-2.7-6.98-1.65-2.29-3.36-4.55-5.01-6.84-1.13-1.56-2.36-3.08-3.3-4.76-4.16-7.43-1.71-16.28,5.72-20.95,7.1-4.46,16.35-2.96,21.39,3.5,2.15,2.76,3.45,5.92,3.94,9.33.48,3.36.72,6.76.98,9.31"/><path d="m288.21,75.61c-2.05.96-3.41,1.51-4.69,2.21-6.08,3.33-11.35,7.68-16.32,12.44-1.66,1.59-2.08,3.55-2.56,5.54-2.5,10.37-4.96,20.75-7.42,31.14-3.11,13.12-6.23,26.24-9.28,39.37-1.16,4.99-2.25,6.47-7.94,6.29-3.59-.12-7.19-.02-10.78-.02-.89,0-1.8.04-2.69-.05-3.3-.36-5.1-2.62-4.54-5.82.4-2.34.96-4.64,1.5-6.96,5.54-24.12,11.09-48.24,16.61-72.36.63-2.75,1.18-5.51.41-8.35-.8-2.97-2.2-4.31-5.35-4.37-1.93-.04-3.88.23-5.79.51-1.77.26-3.49.85-5.27,1.1-3.67.51-5.97-1.87-5.59-5.57.33-3.2,1.67-5.44,4.95-6.7,6.43-2.46,12.74-5.26,19.59-6.31,2.93-.45,5.97-.64,8.93-.48,7.75.43,13.12,4.98,15.07,12.39.29,1.11.64,2.2.98,3.41,1.95-.52,3-1.84,4.24-2.84,4.79-3.8,9.57-7.61,14.85-10.75,2.98-1.78,6.16-3.01,9.59-3.63,9.95-1.8,18.65,3.18,21.87,12.7,2.05,6.04,2.51,12.24.43,18.35-3.04,8.93-12.15,13.17-20.96,9.94-6.75-2.47-10.95-8.87-10.47-15.98.05-.74.19-1.47.28-2.21.09-.72.17-1.44.35-3.01"/><path d="m143.59,155.29c.6-3.5,1.02-7.03,1.84-10.48,4.51-19.03,9.14-38.04,13.66-57.07.61-2.58,1.11-5.24,1.22-7.88.18-4.64-2.62-7.12-7.35-6.71-2.23.2-4.42.76-6.64,1.1-1.47.22-2.97.5-4.45.46-2.26-.05-3.97-1.73-4.06-3.96-.14-3.74.98-6.79,4.64-8.3,6.92-2.85,13.84-5.63,21.34-6.66,3.6-.49,7.16-.42,10.71.4,6.98,1.62,11.47,6.38,12.58,13.43.73,4.6.47,9.15-.66,13.67-3.56,14.23-7.11,28.47-10.65,42.7-1.47,5.89-2.98,11.79-4.29,17.72-.47,2.14-.59,4.41-.5,6.6.12,2.85,1.7,5.24,5.15,5.79,2.69.42,5.33.7,8.03.2,1.62-.3,3.25-.62,4.89-.7,3.33-.16,5.37,1.94,5.2,5.21-.18,3.39-1.56,5.81-5,7.13-6.3,2.41-12.61,4.71-19.24,6.02-4.14.81-8.33.92-12.46-.21-9.02-2.46-13.77-8.89-13.96-18.47"/><path d="m186.21,0c9.8-.02,17.39,7.37,17.44,17.03.05,10.09-7.96,17.61-17.56,17.49-10.53-.14-16.92-9.13-17-17.16-.11-9.34,7.69-17.61,17.12-17.35Z"/></svg>
+    Sources: airweave school adoption records; Paris Opera Ballet School partnership release (PR TIMES, 31 Jul 2023); IMG Academy partnership release (2016);
+    Chiba S. et al., <a href="https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0197521">PLOS ONE 2018</a>;
+    <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7366624">Scientific Reports 2020</a>;
+    <a href="https://www.tsukuba.ac.jp/en/news/20260909210000.html">University of Tsukuba on the 2026 Lasker Award</a>;
+    <a href="https://www.suimin.co.jp/column/house">S’UIMIN sleep‑environment guide</a>.<br>
+    Images &amp; logos: airweave (airweave.com, PR TIMES); Opéra national de Paris; The Royal Ballet School; IMG Academy; UWC ISAK Japan; University of Tsukuba. Logos are trademarks of their respective owners.
+  </div>
+</footer>
+
+<script>
+(function(){
+  var cards=document.querySelectorAll('[data-anim]');
+  function run(el){
+    el.classList.add('in');
+    el.querySelectorAll('.count').forEach(function(c){
+      var to=parseFloat(c.dataset.to),dec=+(c.dataset.dec||0),t0=null;
+      if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){return}
+      function step(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/1200,1);c.textContent=(to*(1-Math.pow(1-p,3))).toFixed(dec);if(p<1)requestAnimationFrame(step)}
+      requestAnimationFrame(step);
+    });
+  }
+  if(!('IntersectionObserver' in window)){cards.forEach(run);return}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){run(e.target);io.unobserve(e.target)}})},{threshold:.35});
+  cards.forEach(function(c){io.observe(c)});
+})();
+</script>
+</body>
+</html>
